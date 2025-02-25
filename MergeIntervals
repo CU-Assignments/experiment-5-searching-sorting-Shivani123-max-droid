@@ -1,0 +1,14 @@
+def merge(intervals):
+    if not intervals:
+        return []
+    
+    intervals.sort()  # Sort by start time
+    merged = [intervals[0]]
+    
+    for start, end in intervals[1:]:
+        if start <= merged[-1][1]:  # Overlap condition
+            merged[-1][1] = max(merged[-1][1], end)  # Merge
+        else:
+            merged.append([start, end])  # No overlap, add new interval
+            
+    return merged
